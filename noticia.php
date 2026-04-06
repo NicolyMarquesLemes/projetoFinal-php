@@ -1,5 +1,5 @@
 <?php
-include("conexao.php");
+require_once("backend/conexao.php");
 
 // Verificar ID
 if (!isset($_GET["id"])) {

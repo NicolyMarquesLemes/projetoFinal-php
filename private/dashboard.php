@@ -1,5 +1,5 @@
 <?php
-include("verifica_login.php");
+require_once(__DIR__ . "/../backend/verifica_login.php");
 ?>
 
 <!DOCTYPE html>
@@ -9,9 +9,11 @@ include("verifica_login.php");
 </head>
 <body>
 
-<h2>Bem-vindo, <?php echo $_SESSION["usuario_nome"]; ?>!</h2>
+<h2>
+Bem-vindo, <?php echo htmlspecialchars($_SESSION["usuario_nome"]); ?>!
+</h2>
 
-<a href="logout.php">Sair</a>
+<a href="../logout.php">Sair</a>
 
 </body>
 </html>

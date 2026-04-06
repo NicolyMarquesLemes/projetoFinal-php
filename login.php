@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("conexao.php");
+require_once("backend/conexao.php");
 require_once("dao/UsuarioDAO.php");
 
 $mensagem = "";
@@ -12,7 +12,7 @@ if (isset($_POST["btnLogin"])) {
     $senha = trim($_POST["senha"]);
 
     $dao = new UsuarioDAO($conn);
-    $resultado = $dao->login($email, $senha);
+     $resultado = $dao->login($email, $senha);
 
     if (is_array($resultado)) {
         // Salva dados do usuário na sessão
@@ -36,20 +36,23 @@ if (isset($_POST["btnLogin"])) {
 <head>
     <title>Login</title>
 </head>
-<body>
+<body class="auth-body">
 
-<h2>Login</h2>
+<div class="auth-container">
+    <h2>🔐 Login</h2>
 
-<form method="POST">
-    <input type="email" name="email" placeholder="Seu email" required><br>
-    <input type="password" name="senha" placeholder="Senha" required><br>
-    <button type="submit" name="btnLogin">Entrar</button>
-</form>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Seu email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit" name="btnLogin">Entrar</button>
+    </form>
 
-<p class="mensagem"><?php echo $mensagem; ?></p>
+    <p class="mensagem"><?php echo $mensagem; ?></p>
 
-<!-- Botão para voltar à página inicial -->
-<a href="index.php" class="voltar">← Voltar para Início</a>
+    <div class="auth-footer">
+        <p>Não tem conta? <a href="cadastro.php">Cadastrar</a></p>
+    </div>
+</div>
 
 </body>
 </html>

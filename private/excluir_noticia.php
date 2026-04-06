@@ -1,8 +1,7 @@
 <?php
-include("verifica_login.php");
-include("conexao.php");
+require_once(__DIR__ . "/../backend/verifica_login.php");
+require_once(__DIR__ . "/../backend/conexao.php");
 
-$dao->deletar($id);
 // Verificar ID
 if (!isset($_GET["id"])) {
     header("Location: dashboard.php");
@@ -26,23 +25,14 @@ $noticia = $resultado->fetch_assoc();
 
 // Verificar autor
 if ($noticia["autor"] != $_SESSION["usuario_id"]) {
-    echo "Você não tem permissão para excluir!";
+    echo "Sem permissão!";
     exit();
 }
 
-// Deletar imagem (se existir)
-if (!empty($noticia["imagem"]) && file_exists("imagens/" . $noticia["imagem"])) {
-    unlink("imagens/" . $noticia["imagem"]);
-}
-
-// Deletar notícia
+// Deletar
 $delete = $conn->prepare("DELETE FROM noticias WHERE id = ?");
 $delete->bind_param("i", $id);
+$delete->execute();
 
-if ($delete->execute()) {
-    header("Location: dashboard.php");
-    exit();
-} else {
-    echo "Erro ao excluir!";
-}
-?>
+header("Location: dashboard.php");
+exit();

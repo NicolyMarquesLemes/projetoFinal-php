@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("conexao.php");
+require_once("backend/conexao.php");
 require_once("dao/UsuarioDAO.php");
 
 // Se o usuário não estiver logado, redireciona

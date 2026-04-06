@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("conexao.php");
+require_once("backend/conexao.php");
 require_once("dao/NoticiaDAO.php");
 
 // Se não estiver logado, redireciona

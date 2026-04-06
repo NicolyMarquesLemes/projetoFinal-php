@@ -1,7 +1,7 @@
+
 <?php
-session_start();
-include("verifica_login.php");
-include("conexao.php");
+require_once(__DIR__ . "/../backend/verifica_login.php");
+require_once(__DIR__ . "/../backend/conexao.php");
 
 // Verificar ID
 if (!isset($_GET["id"])) {

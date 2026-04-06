@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("conexao.php");
+require_once("backend/conexao.php");
 require_once("dao/NoticiaDAO.php");
 
 $dao = new NoticiaDAO($conn);
@@ -37,7 +37,7 @@ $paises = $dao->listarPaises();
     <!-- Menu de login/cadastro -->
     <?php if(isset($_SESSION["usuario_id"])): ?>
         <p>Olá, <?php echo htmlspecialchars($_SESSION["usuario_nome"]); ?> | 
-           <a href="dashboard.php">Dashboard</a> | 
+           <a href="private/dashboard.php">Dashboard</a> | 
            <a href="logout.php">Sair</a>
         </p>
     <?php else: ?>

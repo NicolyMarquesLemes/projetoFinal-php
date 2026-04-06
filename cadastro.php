@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("conexao.php");
+require_once("backend/conexao.php");
 require_once("dao/UsuarioDAO.php");
 
 $mensagem = "";
@@ -36,20 +36,24 @@ if (isset($_POST["btnCadastrar"])) {
 <head>
     <title>Cadastro</title>
 </head>
-<body>
+<body class="auth-body">
 
-<h2>Cadastro de Usuário</h2>
+<div class="auth-container">
+    <h2>📝 Cadastro</h2>
 
-<form method="POST">
-    <input type="text" name="nome" placeholder="Nome" required><br>
-    <input type="email" name="email" placeholder="Email" required><br>
-    <input type="password" name="senha" placeholder="Senha" required><br>
-    <button type="submit" name="btnCadastrar">Cadastrar</button>
-</form>
+    <form method="POST">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <button type="submit" name="btnCadastrar">Cadastrar</button>
+    </form>
 
-<p class="mensagem"><?php echo $mensagem; ?></p>
+    <p class="mensagem"><?php echo $mensagem; ?></p>
 
-<a href="index.php" class="voltar">← Voltar para Início</a>
+    <div class="auth-footer">
+        <p>Já tem conta? <a href="login.php">Entrar</a></p>
+    </div>
+</div>
 
 </body>
 </html>
