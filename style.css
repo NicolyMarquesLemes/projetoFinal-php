@@ -1,317 +1,267 @@
-/* =========================
-   RESET + BASE
-========================= */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2f7, #e3e8ef);
-    color: #1e293b;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-.container {
-    width: 92%;
-    max-width: 1100px;
-    margin: auto;
+h1, h2 {
+    color: #6a0dad; /* Roxo principal */
 }
 
-/* =========================
-   HEADER / NAVBAR
-========================= */
-.topo {
-    background: linear-gradient(90deg, #0f172a, #1e293b);
-    color: white;
-    padding: 20px 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+a {
+    text-decoration: none;
+    color: #6a0dad;
+    transition: color 0.3s;
 }
 
-.topo h1 {
-    font-size: 28px;
+a:hover {
+    color: #9b30ff;
 }
 
-.topo p {
-    margin-top: 5px;
-}
-
-.topo a {
-    color: #38bdf8;
-    margin-right: 10px;
-    font-weight: 500;
-}
-
-.topo a:hover {
-    text-decoration: underline;
-}
-
-/* =========================
-   TÍTULOS
-========================= */
-h1, h2, h3 {
+/* ===============================
+   PARÁGRAFOS E ESPAÇAMENTOS
+================================*/
+p {
     margin-bottom: 10px;
 }
 
-/* =========================
-   CARDS DE NOTÍCIA
-========================= */
-.noticia {
-    background: white;
-    padding: 18px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: 0.3s;
-    position: relative;
-    overflow: hidden;
+.mensagem {
+    color: #e53935; /* vermelho para mensagens de erro */
+    font-weight: bold;
+    margin-top: 10px;
 }
 
-.noticia::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 5px;
-    height: 100%;
-    background: linear-gradient(180deg, #007bff, #00c6ff);
+/* ===============================
+   BOTÕES GERAIS
+================================*/
+button, .nova {
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+button {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #6a0dad, #9b30ff);
+    color: #fff;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #9b30ff, #6a0dad);
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   LINKS ESPECÍFICOS
+================================*/
+.nova {
+    display: inline-block;
+    background-color: #6a0dad;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.nova:hover {
+    background-color: #9b30ff;
+}
+
+/* ===============================
+   FORMULÁRIOS E INPUTS
+================================*/
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"], 
+input[type="email"], 
+input[type="password"], 
+textarea, 
+select, 
+input[type="file"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: #9b30ff;
+    box-shadow: 0 0 8px rgba(155,48,255,0.3);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* ===============================
+   CARDS DE NOTÍCIAS
+================================*/
+.noticia {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .noticia:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    transform: translateY(-3px);
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.12);
 }
 
 .noticia img {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
+    display: block;
+    margin-bottom: 12px;
     border-radius: 8px;
-    margin-bottom: 10px;
 }
 
 .noticia h2 {
-    color: #0f172a;
+    margin-bottom: 10px;
 }
 
 .noticia p {
     margin-bottom: 8px;
 }
 
-/* =========================
-   BOTÕES
-========================= */
-button {
-    background: linear-gradient(90deg, #007bff, #00c6ff);
-    border: none;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
+/* Bandeiras pequenas */
+.noticia img[width="20"] {
+    vertical-align: middle;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0,123,255,0.4);
-}
-
-/* =========================
-   LINKS
-========================= */
-a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* =========================
-   FORMULÁRIOS
-========================= */
-form {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    max-width: 500px;
-    margin-top: 20px;
-}
-
-input, textarea, select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    transition: 0.2s;
-}
-
-input:focus, textarea:focus, select:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 5px rgba(0,123,255,0.3);
-}
-
-/* =========================
-   MENSAGENS
-========================= */
-.mensagem {
+/* ===============================
+   AÇÕES (EDITAR / EXCLUIR)
+================================*/
+.acoes {
     margin-top: 10px;
-    font-weight: bold;
-    color: #16a34a;
 }
 
-.erro {
-    color: #dc2626;
+.acoes a, .acoes button {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
-/* =========================
-   DASHBOARD
-========================= */
-.dashboard {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+.editar {
+    background-color: #ff9800;
+    color: #fff;
 }
 
-/* =========================
-   IMAGEM GRANDE
-========================= */
-.img-grande {
-    width: 100%;
-    border-radius: 12px;
-    margin: 15px 0;
+.editar:hover {
+    background-color: #e68900;
 }
 
-/* =========================
-   FILTRO
-========================= */
-.filtro {
-    margin: 20px 0;
+.excluir {
+    background-color: #e53935;
+    color: #fff;
 }
 
-/* =========================
-   ANIMAÇÕES
-========================= */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.excluir:hover {
+    background-color: #b71c1c;
 }
 
-.noticia {
-    animation: fadeIn 0.4s ease-in-out;
-}
-
-/* =========================
-   RESPONSIVO
-========================= */
-@media (max-width: 768px) {
-    .topo h1 {
-        font-size: 22px;
-    }
-
-    .noticia img {
-        max-height: 150px;
-    }
-}
-
-/* =========================
-   LOGIN / CADASTRO
-========================= */
-
-/* Centralizar tela */
+/* ===============================
+   AUTENTICAÇÃO (LOGIN / CADASTRO)
+================================*/
 .auth-body {
     display: flex;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #0f172a, #1e3a8a);
+    align-items: center;
+    min-height: 90vh;
 }
 
-/* Card */
 .auth-container {
-    background: white;
-    padding: 35px;
+    background-color: #fff;
+    padding: 40px 30px;
     border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Título */
-.auth-container h2 {
     text-align: center;
-    margin-bottom: 20px;
-    color: #0f172a;
+    transition: transform 0.3s;
 }
 
-/* Inputs */
-.auth-container input {
+.auth-container:hover {
+    transform: translateY(-5px);
+}
+
+.auth-container h2 {
+    color: #6a0dad; /* Roxo principal */
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.auth-container input[type="text"],
+.auth-container input[type="email"],
+.auth-container input[type="password"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
+    padding: 14px 15px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
-    transition: 0.3s;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s;
 }
 
 .auth-container input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 8px rgba(0,123,255,0.3);
+    border-color: #9b30ff;
+    box-shadow: 0 0 8px rgba(155,48,255,0.4);
     outline: none;
 }
 
-/* Botão */
 .auth-container button {
     width: 100%;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 10px;
     border: none;
-    background: linear-gradient(90deg, #007bff, #00c6ff);
-    color: white;
-    font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    background: linear-gradient(90deg, #6a0dad, #9b30ff);
+    color: #fff;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
 }
 
 .auth-container button:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,123,255,0.4);
+    background: linear-gradient(90deg, #9b30ff, #6a0dad);
+    transform: translateY(-2px);
 }
 
-/* Mensagem */
-.auth-container .mensagem {
-    text-align: center;
-    margin-top: 10px;
-}
-
-/* Link inferior */
 .auth-footer {
-    text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
+    font-size: 0.9rem;
 }
 
 .auth-footer a {
-    color: #007bff;
+    color: #6a0dad;
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 .auth-footer a:hover {
-    text-decoration: underline;
+    color: #9b30ff;
+}
+
+.mensagem {
+    color: #e53935; /* vermelho para erro */
+    font-weight: bold;
+    margin-top: 10px;
 }

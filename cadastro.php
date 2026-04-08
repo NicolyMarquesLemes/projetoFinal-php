@@ -40,6 +40,7 @@ if (isset($_POST["btnCadastrar"])) {
 
 <div class="auth-container">
     <h2>📝 Cadastro</h2>
+    <link rel="stylesheet" href="style.css">
 
     <form method="POST">
         <input type="text" name="nome" placeholder="Nome" required>

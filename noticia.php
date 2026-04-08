@@ -54,10 +54,9 @@ $noticia = $resultado->fetch_assoc();
 
     <!-- Imagem -->
     <?php if (!empty($noticia["imagem"])) { ?>
-        <img src="imagens/<?php echo $noticia["imagem"]; ?>" width="400"><br><br>
+        <img src="img/<?php echo $noticia["imagem"]; ?>" width="400"><br><br>
     <?php } ?>
 
-    <!-- Texto completo -->
     <p><?php echo nl2br($noticia["noticia"]); ?></p>
 
 </div>

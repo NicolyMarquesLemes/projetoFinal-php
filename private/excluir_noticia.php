@@ -1,14 +1,21 @@
 <?php
-require_once(__DIR__ . "/../backend/verifica_login.php");
+session_start();
 require_once(__DIR__ . "/../backend/conexao.php");
+require_once(__DIR__ . "/../dao/NoticiaDAO.php");
 
-// Verificar ID
-if (!isset($_GET["id"])) {
-    header("Location: dashboard.php");
-    exit();
+// Verifica login
+if (!isset($_SESSION["usuario_id"])) {
+    header("Location: login.php");
+    exit;
 }
 
-$id = $_GET["id"];
+// Verifica POST
+if (!isset($_POST["id"])) {
+    header("Location: index.php");
+    exit;
+}
+
+$id = intval($_POST["id"]);
 
 // Buscar notícia
 $sql = $conn->prepare("SELECT * FROM noticias WHERE id = ?");
@@ -17,22 +24,28 @@ $sql->execute();
 $resultado = $sql->get_result();
 
 if ($resultado->num_rows == 0) {
-    echo "Notícia não encontrada!";
-    exit();
+    die("Notícia não encontrada!");
 }
 
 $noticia = $resultado->fetch_assoc();
 
-// Verificar autor
+// Verifica autor
 if ($noticia["autor"] != $_SESSION["usuario_id"]) {
-    echo "Sem permissão!";
-    exit();
+    die("Sem permissão!");
 }
 
-// Deletar
+// Deletar imagem
+if (!empty($noticia["imagem"])) {
+    $caminho = __DIR__ . "/imagens/" . $noticia["imagem"];
+    if (file_exists($caminho)) {
+        unlink($caminho);
+    }
+}
+
+// Deletar do banco
 $delete = $conn->prepare("DELETE FROM noticias WHERE id = ?");
 $delete->bind_param("i", $id);
 $delete->execute();
 
-header("Location: dashboard.php");
-exit();
+header("Location: ../index.php");
+exit;

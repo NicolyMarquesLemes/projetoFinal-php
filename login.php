@@ -40,6 +40,7 @@ if (isset($_POST["btnLogin"])) {
 
 <div class="auth-container">
     <h2>🔐 Login</h2>
+    <link rel="stylesheet" href="style.css">
 
     <form method="POST">
         <input type="email" name="email" placeholder="Seu email" required>

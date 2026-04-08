@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once("backend/conexao.php");
-require_once("dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../backend/conexao.php");
+require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 
-// Se o usuário não estiver logado, redireciona
+// Verifica se está logado
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: login.php");
     exit;
@@ -12,14 +12,14 @@ if (!isset($_SESSION["usuario_id"])) {
 $dao = new UsuarioDAO($conn);
 $mensagem = "";
 
-// Pega os dados atuais do usuário
+// Busca dados atuais
 $usuario = $dao->buscarPorId($_SESSION["usuario_id"]);
 
 if (!$usuario) {
-    die("Usuário não encontrado.");
+    die("Usuário não encontrado!");
 }
 
-// Atualiza os dados se o formulário for enviado
+// Atualiza os dados
 if (isset($_POST["btnAtualizar"])) {
     $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
@@ -28,12 +28,11 @@ if (isset($_POST["btnAtualizar"])) {
     if (empty($nome) || empty($email)) {
         $mensagem = "Preencha todos os campos obrigatórios!";
     } else {
-        // Atualiza o usuário no banco
         $resultado = $dao->atualizar($_SESSION["usuario_id"], $nome, $email, $senha);
 
         if ($resultado === true) {
             $mensagem = "Dados atualizados com sucesso!";
-            $_SESSION["usuario_nome"] = $nome; // atualiza o nome na sessão
+            $_SESSION["usuario_nome"] = $nome; // Atualiza sessão
         } elseif ($resultado === "email_existente") {
             $mensagem = "Este email já está cadastrado para outro usuário.";
         } else {
@@ -46,22 +45,26 @@ if (isset($_POST["btnAtualizar"])) {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Editar Usuário</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<h2>Editar Usuário</h2>
+<div class="auth-container">
+    <h2>Editar Usuário</h2>
 
-<form method="POST">
-    <input type="text" name="nome" placeholder="Nome" value="<?php echo htmlspecialchars($usuario['nome']); ?>" required><br>
-    <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required><br>
-    <input type="password" name="senha" placeholder="Nova senha (deixe vazio para não alterar)"><br>
-    <button type="submit" name="btnAtualizar">Atualizar</button>
-</form>
+    <form method="POST">
+        <input type="text" name="nome" placeholder="Nome" value="<?php echo htmlspecialchars($usuario['nome']); ?>" required>
+        <input type="email" name="email" placeholder="Email" value="<?php echo htmlspecialchars($usuario['email']); ?>" required>
+        <input type="password" name="senha" placeholder="Nova senha (deixe vazio para não alterar)">
+        <button type="submit" name="btnAtualizar">Atualizar</button>
+    </form>
 
-<p class="mensagem"><?php echo $mensagem; ?></p>
+    <?php if(!empty($mensagem)) echo '<p class="mensagem">'.$mensagem.'</p>'; ?>
 
-<a href="index.php" class="voltar">← Voltar para Início</a>
+    <a href="../index.php" class="voltar">← Voltar para Início</a>
+</div>
 
 </body>
 </html>

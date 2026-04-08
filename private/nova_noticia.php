@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once("backend/conexao.php");
-require_once("dao/NoticiaDAO.php");
+require_once(__DIR__ . "/../backend/conexao.php");
+require_once(__DIR__ . "/../dao/NoticiaDAO.php");
 
 // Se não estiver logado, redireciona
 if(!isset($_SESSION["usuario_id"])){
@@ -27,7 +27,8 @@ if(isset($_POST["btnCriar"])) {
     // Upload de imagem (opcional)
     if(isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == 0){
         $imagemNome = time() . "_" . $_FILES["imagem"]["name"];
-        move_uploaded_file($_FILES["imagem"]["tmp_name"], "imagens/" . $imagemNome);
+       $destino = __DIR__ . "/../img/" . $imagemNome;
+move_uploaded_file($_FILES["imagem"]["tmp_name"], $destino);
     } else {
         $imagemNome = null;
     }
@@ -53,6 +54,7 @@ if(isset($_POST["btnCriar"])) {
 <head>
     <meta charset="UTF-8">
     <title>Criar Nova Notícia</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 <h2>Criar Nova Notícia</h2>
@@ -66,7 +68,7 @@ if(isset($_POST["btnCriar"])) {
 </form>
 
 <p><?php echo $mensagem; ?></p>
-<a href="index.php">← Voltar para Início</a>
+<a href="../index.php">← Voltar para Início</a>
 
 </body>
 </html>

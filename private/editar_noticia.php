@@ -68,7 +68,7 @@ if (isset($_POST["atualizar"])) {
 <html>
 <head>
     <title>Editar Notícia</title>
-    <link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
@@ -81,7 +81,7 @@ if (isset($_POST["atualizar"])) {
 
     <!-- Imagem atual -->
     <?php if (!empty($noticia["imagem"])): ?>
-        <img src="imagens/<?php echo $noticia["imagem"]; ?>" width="150"><br><br>
+       <img src="../imagens/<?php echo $noticia["imagem"]; ?>">
     <?php endif; ?>
 
     <input type="file" name="imagem"><br><br>
@@ -89,7 +89,7 @@ if (isset($_POST["atualizar"])) {
 </form>
 
 <p><?php echo $mensagem; ?></p>
-<a href="dashboard.php">← Voltar</a>
+<a href="../index.php">← Voltar</a>
 
 </body>
 </html>

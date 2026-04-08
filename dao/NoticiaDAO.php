@@ -4,9 +4,9 @@ class NoticiaDAO {
 
     // Listar notícias de um país específico
 public function listarPorPais($pais){
-    $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.imagem, n.pais, u.nome 
-            FROM noticias n 
-            JOIN usuarios u ON n.autor = u.id 
+    $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.autor, u.nome
+FROM noticias n
+JOIN usuarios u ON n.autor = u.id
             WHERE n.pais = ?
             ORDER BY n.data DESC";
     $stmt = $this->conn->prepare($sql);
@@ -44,20 +44,20 @@ public function listarPaises(){
     }
 
     // Listar todas as notícias (para index.php)
-    public function listar() {
-        $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.imagem, n.pais, u.nome 
-                FROM noticias n 
-                JOIN usuarios u ON n.autor = u.id 
-                ORDER BY n.data DESC";
-        $result = $this->conn->query($sql);
-        $noticias = [];
-        if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $noticias[] = $row;
-            }
+public function listar() {
+    $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.imagem, n.pais, n.autor, u.nome 
+            FROM noticias n 
+            JOIN usuarios u ON n.autor = u.id 
+            ORDER BY n.data DESC";
+    $result = $this->conn->query($sql);
+    $noticias = [];
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $noticias[] = $row;
         }
-        return $noticias;
     }
+    return $noticias;
+}
 
     // Buscar notícia por id (para noticia.php e editar)
     public function buscarPorId($id) {

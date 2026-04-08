@@ -1,9 +1,10 @@
 <?php
 session_start();
-require_once("backend/conexao.php");
-require_once("dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../backend/conexao.php");
+require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 
-// Se o usuário não estiver logado, redireciona
+
+// Verifica se está logado
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: login.php");
     exit;
@@ -30,20 +31,24 @@ if (isset($_POST["btnExcluir"])) {
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Excluir Conta</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
 
-<h2>Excluir Conta</h2>
+<div class="auth-container">
+    <h2>Excluir Conta</h2>
 
-<p>Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.</p>
+    <p>Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.</p>
 
-<form method="POST">
-    <button type="submit" name="btnExcluir">Sim, excluir minha conta</button>
-    <a href="index.php" class="voltar">Não, voltar para o início</a>
-</form>
+    <form method="POST">
+        <button type="submit" name="btnExcluir" class="excluir">Sim, excluir minha conta</button>
+        <a href="../index.php" class="voltar">Não, voltar para o início</a>
+    </form>
 
-<p class="mensagem"><?php echo $mensagem; ?></p>
+    <?php if(!empty($mensagem)) echo '<p class="mensagem">'.$mensagem.'</p>'; ?>
+</div>
 
 </body>
 </html>
