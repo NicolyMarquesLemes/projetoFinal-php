@@ -5,14 +5,11 @@ class UsuarioDAO {
 
     private $conn;
 
-    // Construtor
     public function __construct($conn) {
         $this->conn = $conn;
     }
 
-    // 🔹 Criar usuário (cadastro)
     public function cadastrar($nome, $email, $senha) {
-        // Verificar se email já existe
         $check = $this->conn->prepare("SELECT id FROM usuarios WHERE email = ?");
         $check->bind_param("s", $email);
         $check->execute();
@@ -30,7 +27,6 @@ class UsuarioDAO {
         return $sql->execute();
     }
 
-    // 🔹 Login
     public function login($email, $senha) {
         $sql = $this->conn->prepare("SELECT id, nome, senha FROM usuarios WHERE email = ?");
         $sql->bind_param("s", $email);
@@ -49,7 +45,6 @@ class UsuarioDAO {
         }
     }
 
-    // 🔹 Buscar por ID
     public function buscarPorId($id) {
         $stmt = $this->conn->prepare("SELECT id, nome, email FROM usuarios WHERE id = ?");
         $stmt->bind_param("i", $id);
@@ -57,7 +52,6 @@ class UsuarioDAO {
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // 🔹 Atualizar usuário
     public function atualizar($id, $nome, $email, $senha = null) {
         if ($senha) {
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
@@ -70,7 +64,6 @@ class UsuarioDAO {
         return $stmt->execute();
     }
 
-    // 🔹 Excluir usuário
     public function excluir($id) {
         $stmt = $this->conn->prepare("DELETE FROM usuarios WHERE id = ?");
         $stmt->bind_param("i", $id);

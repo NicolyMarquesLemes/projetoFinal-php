@@ -3,7 +3,6 @@ session_start();
 require_once(__DIR__ . "/../backend/conexao.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 
-// Verifica se está logado
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: login.php");
     exit;
@@ -12,14 +11,12 @@ if (!isset($_SESSION["usuario_id"])) {
 $dao = new UsuarioDAO($conn);
 $mensagem = "";
 
-// Busca dados atuais
 $usuario = $dao->buscarPorId($_SESSION["usuario_id"]);
 
 if (!$usuario) {
     die("Usuário não encontrado!");
 }
 
-// Atualiza os dados
 if (isset($_POST["btnAtualizar"])) {
     $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
@@ -32,7 +29,7 @@ if (isset($_POST["btnAtualizar"])) {
 
         if ($resultado === true) {
             $mensagem = "Dados atualizados com sucesso!";
-            $_SESSION["usuario_nome"] = $nome; // Atualiza sessão
+            $_SESSION["usuario_nome"] = $nome;
         } elseif ($resultado === "email_existente") {
             $mensagem = "Este email já está cadastrado para outro usuário.";
         } else {

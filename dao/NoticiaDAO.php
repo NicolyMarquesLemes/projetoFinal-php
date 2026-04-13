@@ -2,7 +2,6 @@
 class NoticiaDAO {
     private $conn;
 
-    // Listar notícias de um país específico
 public function listarPorPais($pais){
     $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.autor, u.nome
 FROM noticias n
@@ -20,7 +19,6 @@ JOIN usuarios u ON n.autor = u.id
     return $noticias;
 }
 
-// Listar todos os países das notícias
 public function listarPaises(){
     $sql = "SELECT DISTINCT pais FROM noticias ORDER BY pais ASC";
     $result = $this->conn->query($sql);
@@ -34,7 +32,6 @@ public function listarPaises(){
         $this->conn = $conn;
     }
 
-    // Criar notícia
     public function criar($titulo, $texto, $data, $autor, $imagem, $pais) {
         $sql = "INSERT INTO noticias (titulo, noticia, data, autor, imagem, pais) 
                 VALUES (?, ?, ?, ?, ?, ?)";
@@ -43,7 +40,6 @@ public function listarPaises(){
         return $stmt->execute();
     }
 
-    // Listar todas as notícias (para index.php)
 public function listar() {
     $sql = "SELECT n.id, n.titulo, n.noticia, n.data, n.imagem, n.pais, n.autor, u.nome 
             FROM noticias n 
@@ -59,7 +55,6 @@ public function listar() {
     return $noticias;
 }
 
-    // Buscar notícia por id (para noticia.php e editar)
     public function buscarPorId($id) {
         $sql = "SELECT * FROM noticias WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
@@ -69,7 +64,6 @@ public function listar() {
         return $result->fetch_assoc();
     }
 
-    // Editar notícia
     public function editar($id, $titulo, $texto, $pais, $imagem = null) {
         if($imagem){
             $sql = "UPDATE noticias SET titulo = ?, noticia = ?, pais = ?, imagem = ? WHERE id = ?";
@@ -83,7 +77,6 @@ public function listar() {
         return $stmt->execute();
     }
 
-    // Excluir notícia
     public function excluir($id) {
         $sql = "DELETE FROM noticias WHERE id = ?";
         $stmt = $this->conn->prepare($sql);

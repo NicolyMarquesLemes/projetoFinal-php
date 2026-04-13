@@ -3,8 +3,6 @@ session_start();
 require_once(__DIR__ . "/../backend/conexao.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 
-
-// Verifica se está logado
 if (!isset($_SESSION["usuario_id"])) {
     header("Location: login.php");
     exit;
@@ -13,12 +11,10 @@ if (!isset($_SESSION["usuario_id"])) {
 $dao = new UsuarioDAO($conn);
 $mensagem = "";
 
-// Confirma exclusão
 if (isset($_POST["btnExcluir"])) {
     $id = $_SESSION["usuario_id"];
 
     if ($dao->excluir($id)) {
-        // Logout após exclusão
         session_destroy();
         header("Location: index.php");
         exit;

@@ -7,16 +7,12 @@ require_once("dao/UsuarioDAO.php");
 $daoNoticia = new NoticiaDAO($conn);
 $daoUsuario = new UsuarioDAO($conn);
 
-// Filtro por país
 $paisFiltro = $_GET['pais'] ?? '';
 
-// Buscar notícias
 $noticias = $paisFiltro ? $daoNoticia->listarPorPais($paisFiltro) : $daoNoticia->listar();
 
-// Países para filtro
 $paises = $daoNoticia->listarPaises();
 
-// Buscar dados do usuário logado (se houver)
 $usuarioLogado = null;
 if (isset($_SESSION["usuario_id"])) {
     $usuarioLogado = $daoUsuario->buscarPorId($_SESSION["usuario_id"]);
@@ -34,7 +30,6 @@ if (isset($_SESSION["usuario_id"])) {
 
 <h1>📰 Portal de Notícias</h1>
 
-<!-- Menu -->
 <?php if ($usuarioLogado): ?>
     <p>
         Olá, <strong><?php echo htmlspecialchars($usuarioLogado["nome"]); ?></strong> |
@@ -54,7 +49,6 @@ if (isset($_SESSION["usuario_id"])) {
 
 <hr>
 
-<!-- Filtro -->
 <form method="GET">
     <label>Filtrar por país:</label>
     <select name="pais" onchange="this.form.submit()">
@@ -69,7 +63,6 @@ if (isset($_SESSION["usuario_id"])) {
 
 <hr>
 
-<!-- Notícias -->
 <?php if(count($noticias) > 0): ?>
     <?php foreach($noticias as $n): ?>
         <div class="noticia">
@@ -93,7 +86,6 @@ if (isset($_SESSION["usuario_id"])) {
 
             <a href="noticia.php?id=<?php echo $n['id']; ?>">Leia mais</a>
 
-            <!-- Ações do autor -->
             <?php if($usuarioLogado && $usuarioLogado['id'] == $n['autor']): ?>
                 <div class="acoes">
                     <a href="private/editar_noticia.php?id=<?php echo $n['id']; ?>" class="editar">Editar</a>

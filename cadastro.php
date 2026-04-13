@@ -5,10 +5,8 @@ require_once("dao/UsuarioDAO.php");
 
 $mensagem = "";
 
-// Só tenta cadastrar se o formulário foi enviado
 if (isset($_POST["btnCadastrar"])) {
 
-    // Pega valores do formulário
     $nome = trim($_POST["nome"]);
     $email = trim($_POST["email"]);
     $senha = trim($_POST["senha"]);

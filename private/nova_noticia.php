@@ -3,7 +3,6 @@ session_start();
 require_once(__DIR__ . "/../backend/conexao.php");
 require_once(__DIR__ . "/../dao/NoticiaDAO.php");
 
-// Se não estiver logado, redireciona
 if(!isset($_SESSION["usuario_id"])){
     header("Location: login.php");
     exit;
@@ -12,7 +11,6 @@ if(!isset($_SESSION["usuario_id"])){
 $dao = new NoticiaDAO($conn);
 $mensagem = "";
 
-// Inicializa variáveis
 $titulo = "";
 $texto = "";
 $pais = "";
@@ -24,7 +22,6 @@ if(isset($_POST["btnCriar"])) {
     $texto = trim($_POST["texto"]);
     $pais = trim($_POST["pais"]);
 
-    // Upload de imagem (opcional)
     if(isset($_FILES["imagem"]) && $_FILES["imagem"]["error"] == 0){
         $imagemNome = time() . "_" . $_FILES["imagem"]["name"];
        $destino = __DIR__ . "/../img/" . $imagemNome;
@@ -40,7 +37,6 @@ move_uploaded_file($_FILES["imagem"]["tmp_name"], $destino);
         $resultado = $dao->criar($titulo, $texto, $data, $autor, $imagemNome, $pais);
         if($resultado){
             $mensagem = "Notícia criada com sucesso!";
-            // Limpa os campos
             $titulo = $texto = $pais = $imagemNome = "";
         } else {
             $mensagem = "Erro ao criar a notícia.";

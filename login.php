@@ -5,7 +5,6 @@ require_once("dao/UsuarioDAO.php");
 
 $mensagem = "";
 
-// Só tenta logar se o formulário foi enviado
 if (isset($_POST["btnLogin"])) {
 
     $email = trim($_POST["email"]);
@@ -15,11 +14,9 @@ if (isset($_POST["btnLogin"])) {
      $resultado = $dao->login($email, $senha);
 
     if (is_array($resultado)) {
-        // Salva dados do usuário na sessão
         $_SESSION["usuario_id"] = $resultado["id"];
         $_SESSION["usuario_nome"] = $resultado["nome"];
 
-        // 🔹 REDIRECIONA PARA A PÁGINA INICIAL
         header("Location: index.php");
         exit;
 
